@@ -17,8 +17,11 @@ class CreateHabitsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->integer('category_id');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->integer('goal_id')->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

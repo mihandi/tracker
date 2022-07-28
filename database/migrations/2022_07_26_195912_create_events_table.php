@@ -15,9 +15,16 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->integer('date_id');
-            $table->integer('habit_id');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('habit_id');
+            $table->unsignedBigInteger('user_id');
+            $table->date('date');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
+
+
+            $table->foreign('habit_id')->references('id')->on('habits');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('date')->references('dt')->on('calendar');
         });
     }
 
