@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Habit;
 use Illuminate\Http\Request;
 
 class HabitsController extends Controller
@@ -80,5 +81,17 @@ class HabitsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getHabits(){
+        $habits = Habit::all();
+
+        return response()->json([
+            'habits' => $habits
+            ], 200
+        );
     }
 }
