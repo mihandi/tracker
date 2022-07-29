@@ -1,5 +1,8 @@
 <script setup>
 import {onMounted, ref} from "vue";
+import {useRouter} from 'vue-router'
+
+const router = useRouter()
 
 onMounted(async () => getHabits());
 
@@ -11,6 +14,23 @@ const getHabits = async () => {
     console.log('habits', habits.value);
 }
 
+const newHabit = () => {
+    router.push('/habit/create')
+}
+
+const updateHabit = (id) => {
+    router.push('/habit/update/' + id)
+}
+
+const deleteHabit = (id) => {
+    axios.get('/api/deleteHabit/' + id)
+        .then( ()=> {
+            getHabits();
+        }).catch(() => {
+
+    });
+}
+
 </script>
 <template>
     <h1>Habits list</h1>
@@ -20,8 +40,8 @@ const getHabits = async () => {
             <div class="customers__titlebar dflex justify-content-between align-items-center">
 
                 <div class="customers__titlebar--item">
-                    <button class="btn btn-secondary my-1">
-                        Add Product
+                    <button class="btn btn-secondary my-1" @click="newHabit()">
+                        Add Habit
                     </button>
                 </div>
             </div>
@@ -30,11 +50,11 @@ const getHabits = async () => {
                 <!-- <p class="table--heading--col1">&#32;</p> -->
                 <p class="table--heading--col1">ID</p>
                 <p class="table--heading--col2">
-                    Product
+                    Habit
                 </p>
-                <p class="table--heading--col4">Type</p>
+                <p class="table--heading--col4">Description</p>
                 <p class="table--heading--col3">
-                    Inventory
+                    Category
                 </p>
                 <!-- <p class="table--heading--col5">&#32;</p> -->
                 <p class="table--heading--col5">actions</p>
@@ -50,193 +70,20 @@ const getHabits = async () => {
                 <p class="table--items--col2">
                     {{item.description}}}
                 </p><p class="table--items--col3">
-                    10
+                    {{item.category.name }}
                 </p>
                 <div>
-                    <button class="btn-icon btn-icon-success">
+                    <button class="btn-icon btn-icon-success" @click="updateHabit(item.id)">
                         <i class="fas fa-pencil-alt"></i>
                     </button>
-                    <button class="btn-icon btn-icon-danger">
+                    <button class="btn-icon btn-icon-danger"  @click="deleteHabit(item.id)">
                         <i class="far fa-trash-alt"></i>
                     </button>
                 </div>
             </div>
             <div class="table--items products__list__item" v-else>
                 <h1>NOTHING FOUND</h1>
-
+            </div>
         </div>
-
-        </div>
-
-
-        <br><br><br>
-        <div class="products__create ">
-
-            <div class="products__create__titlebar dflex justify-content-between align-items-center">
-                <div class="products__create__titlebar--item">
-
-                    <h1 class="my-1">Add Product</h1>
-                </div>
-                <div class="products__create__titlebar--item">
-
-                    <button class="btn btn-secondary ml-1">
-                        Save
-                    </button>
-                </div>
-            </div>
-
-            <div class="products__create__cardWrapper mt-2">
-                <div class="products__create__main">
-                    <div class="products__create__main--addInfo card py-2 px-2 bg-white">
-                        <p class="mb-1">Name</p>
-                        <input type="text" class="input">
-
-                        <p class="my-1">Description (optional)</p>
-                        <textarea cols="10" rows="5" class="textarea"></textarea>
-
-                        <div class="products__create__main--media--images mt-2">
-                            <ul class="products__create__main--media--images--list list-unstyled">
-                                <li class="products__create__main--media--images--item">
-                                    <div class="products__create__main--media--images--item--imgWrapper">
-                                        <img class="products__create__main--media--images--item--img" alt=""/>
-                                    </div>
-                                </li>
-                                <!-- upload image small -->
-                                <li class="products__create__main--media--images--item">
-                                    <form class="products__create__main--media--images--item--form">
-                                        <label class="products__create__main--media--images--item--form--label"
-                                               for="myfile">Add Image</label>
-                                        <input class="products__create__main--media--images--item--form--input"
-                                               type="file" id="myfile">
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="products__create__sidebar">
-                    <!-- Product Organization -->
-                    <div class="card py-2 px-2 bg-white">
-
-                        <!-- Product unit -->
-                        <div class="my-3">
-                            <p>Product type</p>
-                            <input type="text" class="input">
-                        </div>
-                        <hr>
-
-                        <!-- Product invrntory -->
-                        <div class="my-3">
-                            <p>Inventory</p>
-                            <input type="text" class="input">
-                        </div>
-                        <hr>
-
-                        <!-- Product Price -->
-                        <div class="my-3">
-                            <p>Price</p>
-                            <input type="text" class="input">
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <!-- Footer Bar -->
-            <div class="dflex justify-content-between align-items-center my-3">
-                <p></p>
-                <button class="btn btn-secondary">Save</button>
-            </div>
-
-        </div>
-
-
-        <br><br><br>
-
-        <div class="products__edit ">
-
-            <div class="products__create__titlebar dflex justify-content-between align-items-center">
-                <div class="products__create__titlebar--item">
-
-                    <h1 class="my-1">Edit Product</h1>
-                </div>
-                <div class="products__create__titlebar--item">
-
-                    <button class="btn btn-secondary ml-1">
-                        Save
-                    </button>
-                </div>
-            </div>
-
-            <div class="products__create__cardWrapper mt-2">
-                <div class="products__create__main">
-                    <div class="products__create__main--addInfo card py-2 px-2 bg-white">
-                        <p class="mb-1">Name</p>
-                        <input type="text" class="input">
-
-                        <p class="my-1">Description (optional)</p>
-                        <textarea cols="10" rows="5" class="textarea"></textarea>
-
-                        <div class="products__create__main--media--images mt-2">
-                            <ul class="products__create__main--media--images--list list-unstyled">
-
-                                <li class="products__create__main--media--images--item">
-                                    <div class="products__create__main--media--images--item--imgWrapper">
-                                        <img class="products__create__main--media--images--item--img">
-                                    </div>
-                                </li>
-
-                                <!-- upload image small -->
-                                <li class="products__create__main--media--images--item">
-                                    <form class="products__create__main--media--images--item--form">
-                                        <label class="products__create__main--media--images--item--form--label"
-                                               for="myfile">Add Image</label>
-                                        <input class="products__create__main--media--images--item--form--input"
-                                               type="file" id="myfile">
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="products__create__sidebar">
-                    <!-- Product Organization -->
-                    <div class="card py-2 px-2 bg-white">
-
-                        <!-- Product unit -->
-                        <div class="my-3">
-                            <p>Product type</p>
-                            <input type="text" class="input">
-                        </div>
-                        <hr>
-
-                        <!-- Product invrntory -->
-                        <div class="my-3">
-                            <p>Inventory</p>
-                            <input type="text" class="input">
-                        </div>
-                        <hr>
-
-                        <!-- Product Price -->
-                        <div class="my-3">
-                            <p>Price</p>
-                            <input type="text" class="input">
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <!-- Footer Bar -->
-            <div class="dflex justify-content-between align-items-center my-3">
-                <p></p>
-                <button class="btn btn-secondary">Save</button>
-            </div>
-
-        </div>
-
-
     </div>
 </template>

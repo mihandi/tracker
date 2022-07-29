@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Habit;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HabitsController extends Controller
@@ -35,7 +36,12 @@ class HabitsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $habit = new Habit();
+        $habit->name = $request->name;
+        $habit->description = $request->description;
+        $habit->category_id = $request->category_id;
+
+        $habit->save();
     }
 
     /**
@@ -69,7 +75,13 @@ class HabitsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $habit = Habit::find($id);
+
+        $habit->name = $request->name;
+        $habit->description = $request->description;
+        $habit->category_id = $request->category_id;
+
+        $habit->save();
     }
 
     /**
@@ -80,18 +92,33 @@ class HabitsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $habit = Habit::find($id);
+
+        $habit->delete();
     }
 
     /**
      * @return \Illuminate\Http\JsonResponse
      */
     public function getHabits(){
-        $habits = Habit::all();
+        $habits = Habit::with('category')->get();
 
         return response()->json([
             'habits' => $habits
             ], 200
+        );
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getHabit($id) {
+        $habit = Habit::find($id);
+
+        return response()->json([
+            'habit' => $habit
+        ], 200
         );
     }
 }

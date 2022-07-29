@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Habit;
+use App\Models\HabitUser;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,13 +16,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(30)->create();
 
         for ($i = 0; $i < 10; $i++) {
             $category = new Category();
             $category->name = 'category '. $i;
             $category->description = 'category '. $i . 'description';
-
+            $categoryIDS[] = $i;
             $category->save();
         }
 
@@ -33,5 +34,16 @@ class DatabaseSeeder extends Seeder
 
             $habit->save();
         }
+
+//
+//        for($i = 0; $i < 10; $i++){
+//            $relation = new HabitUser();
+//
+//            $relation->user_id = rand(0,10);
+//            $relation->habit = rand(0,10);
+//
+//            $relation->save();
+//        }
+
     }
 }

@@ -115,22 +115,16 @@ main h1 ~ p {
 }
 
 .btn-icon {
+    background: rgb(47, 214, 111);
+    color: white;
     border: 1px solid #e0e0e0;
-    background: none;
     width: 35px;
     height: 35px;
     border-radius: 4px;
-    color: #6a727a;
     cursor: pointer;
 }
 
-.btn-icon-success:hover {
-
-    background: rgb(47, 214, 111);
-    color: white;
-
-}
-.btn-icon-danger:hover {
+.btn-icon-danger {
     background: crimson;
     color: white;
 
