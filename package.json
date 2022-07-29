@@ -23,6 +23,8 @@
         "@babel/preset-env": "^7.18.9",
         "@vue/compiler-sfc": "^3.2.37",
         "babel-loader": "^8.2.5",
+        "jquery": "^3.6.0",
+        "popper.js": "^1.16.1",
         "vue": "^3.2.36",
         "vue-loader": "^17.0.0",
         "vue-router": "^4.0.13"

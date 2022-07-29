@@ -12,6 +12,18 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
+    .js('resources/js/theme/bootstrap.min.js', 'public/js')
+    .js('resources/js/theme/jquery.easing.min.js', 'public/js')
+    .js('resources/js/theme/jquery.magnific-popup.js', 'public/js')
+    .js('resources/js/theme/jquery.min.js', 'public/js')
+    .js('resources/js/theme/popper.min.js', 'public/js')
+    .js('resources/js/theme/scripts.js', 'public/js')
+    .js('resources/js/theme/swiper.min.js', 'public/js')
+    .js('resources/js/theme/validator.min.js', 'public/js')
     .vue()
+    .css('resources/css/theme/bootstrap.css', 'public/css')
+    .css('resources/css/theme/magnific-popup.css', 'public/css')
+    .css('resources/css/theme/styles.css', 'public/css')
+    .css('resources/css/theme/swiper.css', 'public/css')
+    .sass('resources/sass/app.scss', 'public/css')
 
