@@ -14,6 +14,10 @@ const getHabits = async () => {
     console.log('habits', habits.value);
 }
 
+const viewHabit = (id) => {
+    router.push('/habit/view/' + id)
+}
+
 const newHabit = () => {
     router.push('/habit/create')
 }
@@ -78,6 +82,9 @@ const deleteHabit = (id) => {
                                 {{ item.category.name }}
                             </p>
                             <div>
+                                <button class="btn-icon btn-icon-check" @click="viewHabit(item.id)">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
                                 <button class="btn-icon btn-icon-success" @click="updateHabit(item.id)">
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>

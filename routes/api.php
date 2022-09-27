@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,6 @@ Route::get('/getHabit/{id}', [HabitsController::class, 'getHabit']);
 Route::post('/addHabit', [HabitsController::class, 'store']);
 Route::post('/editHabit/{id}', [HabitsController::class, 'update']);
 Route::get('/deleteHabit/{id}', [HabitsController::class, 'destroy']);
+
+Route::get('/getHabitEvents/{id}', [CalendarController::class, 'getHabitEvents']);
+Route::post('/addEvent', [CalendarController::class, 'store']);

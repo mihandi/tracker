@@ -15,16 +15,19 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->unsignedBigInteger('habit_id');
             $table->unsignedBigInteger('user_id');
-            $table->date('date');
+            $table->dateTime('start');
+            $table->dateTime('end');
+//            $table->date('date');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
 
 
             $table->foreign('habit_id')->references('id')->on('habits');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('date')->references('dt')->on('calendar');
+//            $table->foreign('date')->references('dt')->on('calendar');
         });
     }
 

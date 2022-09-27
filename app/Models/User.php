@@ -43,7 +43,7 @@ class User extends Authenticatable
     ];
 
     public function habits(){
-        return $this->belongsToMany(Habit::class);
+        return $this->hasMany(Habit::class);
     }
 
     public function events()

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\HabitsController;
+use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [SiteController::class, 'index']);
 
 Route::get('/{pathMatch}', function () {
     return view('welcome');

@@ -25,5 +25,6 @@ mix.js('resources/js/app.js', 'public/js')
     .css('resources/css/theme/magnific-popup.css', 'public/css')
     .css('resources/css/theme/styles.css', 'public/css')
     .css('resources/css/theme/swiper.css', 'public/css')
+    // .css('resources/css/calendar/main.css', 'public/css')
     .sass('resources/sass/app.scss', 'public/css')
 

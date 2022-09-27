@@ -18,4 +18,8 @@ class Habit extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function events(){
+        return $this->belongsToMany(Event::class);
+    }
+
 }

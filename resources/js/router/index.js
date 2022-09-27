@@ -4,6 +4,7 @@ import notFound from '../components/notFound.vue';
 import habitsIndex from '../components/habits/index.vue';
 import habitCreate from '../components/habits/create.vue';
 import habitUpdate from '../components/habits/update.vue';
+import habitView from '../components/habits/view.vue';
 import siteIndex from '../components/site/index.vue';
 
 const routes = [
@@ -22,6 +23,11 @@ const routes = [
     {
         path:'/habit/update/:id',
         component: habitUpdate,
+        props: true
+    },
+    {
+        path:'/habit/view/:id',
+        component: habitView,
         props: true
     },
     {
